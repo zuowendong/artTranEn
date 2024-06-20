@@ -6,7 +6,12 @@
 
     {{ articleData?.title }}
 
-    <div class="">{{ articleData?.article }}</div>
+    <div
+      v-for="(sentence, index) in articleData?.article"
+      class="text-left leading-10 no-underline hover:underline"
+    >
+      {{ sentence.en }}
+    </div>
   </div>
 </template>
 
