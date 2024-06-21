@@ -1,18 +1,15 @@
 import fs, { createReadStream } from "node:fs";
 import { createInterface } from "node:readline";
 import { once } from "node:events";
-import path from "node:path";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 interface Article {
   english: string;
   chinese: string;
 }
-
-const inputPath = path.resolve(
-  __dirname,
-  "../../public/CharlotteWeb/Chapter1.md"
-);
-const outputPath = path.resolve(__dirname);
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const inputPath = path.resolve(__dirname, "../public/CharlotteWeb/Chapter1.md");
 
 (async function () {
   const r = createInterface({
@@ -30,24 +27,13 @@ const outputPath = path.resolve(__dirname);
 
 function generateOutPath() {
   const folderPath = path.dirname(inputPath);
-  const folderName = path.basename(folderPath);
-
-  const outputFolder = `${outputPath}\\${folderName}`;
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdir(outputFolder, (err) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log("mkdir successfully");
-      }
-    });
-  }
   const fileName = path.basename(inputPath, ".md");
-  return `${outputFolder}\\${fileName}.json`;
+  return `${folderPath}\\${fileName}.json`;
 }
 
 function overwriteContent(content: string) {
   const path = generateOutPath();
+  console.log(111, path);
 
   fs.writeFile(path, content, (err: any) => {
     if (err) {
