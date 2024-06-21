@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Article Translate English",
-      link: [{ rel: "icon", type: "image/x-icon", href: "/baby.ico" }],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
   css: ["~/assets/css/global.css"],

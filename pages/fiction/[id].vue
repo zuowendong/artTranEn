@@ -8,9 +8,12 @@
 
     <div
       v-for="(sentence, index) in articleData?.article"
-      class="text-left leading-10 no-underline hover:underline"
+      class="text-left h-[80px] leading-10"
     >
-      {{ sentence.en }}
+      <div class="no-underline hover:underline cursor-pointer">
+        {{ sentence.english }}
+      </div>
+      <div>{{ sentence.chinese }}</div>
     </div>
   </div>
 </template>

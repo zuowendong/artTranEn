@@ -3,7 +3,7 @@
 "I don't see why he needs an ax," continued Fern, who was only eight.
 "Well," said her mother, "one of the pigs is a runt. It's very small and weak, and it will never amount to anything. So your father decided to do away with it."
 "Do away with it?" shrieked Fern. "You mean kill it? Just because it's smaller than the others?"
-rs.Arable put a pitcher of cream on the table.
+Mrs.Arable put a pitcher of cream on the table.
 "Don't yell, Fern!" she said. "Your father is right. The pig would probably die any way."
 Fern pushed a chair out of the way and ran outdoors.
 The grass was wet and the earth smelled of springtime.
@@ -50,3 +50,22 @@ He was heavily armed -- an air rifle in one hand, a wooden dagger in the other.
 "Let's see it!" said Avery, setting his gun down. "You call that miserable thing a pig? That's a fine specimen of a pig -- it's no bigger than a white rat."
 "Wash up and eat your breakfast, Avery!" said his mother. "The school bus will be along in half an hour."
 "Can I have a pig, too, Pop?" asked Avery.
+"No, I only distribute pigs to early risers," said Mr.Arable."Fern was up at daylight, trying to rid world of injustice. As a result, she now has a pig. A small one, to be sure, but never the less a pig. It just shows what can happen if a person gets out of bed promptly. Let's eat!"
+But Fern couldn't eat until her pig had a drink of milk.
+Mrs.Arable found a baby's nursing bottle and a rubber nipple.
+She poured warm milk into the bottle, fitted the nipple over the top, and handed it to Fern.
+"Give him his breakfast!" she said.
+A minuter later, Fern was seated on the floor in the corner of the kitchen with her infant between her knees, teaching it to suck from the bottle.
+The pig, although tiny, had a good appetite and caught on quickly.
+The school bus honked from the road.
+"Run!" commanded Mrs.Arable, taking the pig from Fern and slipping a doughnut into her hand.
+Avery grabbed his gun and another doughnut.
+The children ran out to the road and climbed into the bus.
+Fern took no notice of the others in the bus.
+She just sat and stared out of the window, thinking what a blissful world it was and how lucky she was to have entire charge of a pig.
+By the time the bus reached school, Fern had named her pet, selecting the most beautiful names she could think of.
+"Its name is Wilbur," she whispered to herself.
+She was still thinking about the pig when the teacher said: "Fern, what is the capital of Pennsylvania?"
+"Wilbur," replied Fern, dreamily.
+The pupils giggled.
+Fern blushed.

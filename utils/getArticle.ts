@@ -1,15 +1,20 @@
-import fs from "node:fs";
+import { createReadStream } from "node:fs";
+import { createInterface } from "node:readline";
+import { once } from "node:events";
 
-function readArticle() {
-  fs.readFile(
-    "/public/fictions/CharlotteWeb.json",
-    "utf8",
-    (err: any, data: string) => {
-      if (err) {
-        console.error("Error reading file:", err);
-      } else {
-        console.log(data);
-      }
-    }
-  );
+export function processLineByLine() {
+  return new Promise(async (resolve) => {
+    const r = createInterface({
+      input: createReadStream("../public/fictions/CharlotteWeb.md"),
+      crlfDelay: Infinity,
+    });
+
+    r.on("line", (line) => {
+      console.log("process the line ===> ", line);
+      resolve(line);
+    });
+
+    await once(r, "close");
+    console.log("file processed");
+  });
 }
