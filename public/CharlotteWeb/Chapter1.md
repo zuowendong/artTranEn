@@ -1,6 +1,6 @@
 "Where's Papa going with the ax?" said Fern to her mother as they were setting the table for breakfast.
 “爸爸拿着斧子去哪儿了？”在他们收拾桌子准备吃早饭时，芬问她的母亲。
-"Out to the hog house," replied Mrs.Arable. "Some pings were born last night."
+"Out to the hog house," replied Mrs.Arable. "Some pigs were born last night."
 “去猪圈了，”阿拉贝尔太太回答。“昨晚生了几只小猪。”
 "I don't see why he needs an ax," continued Fern, who was only eight.
 “我不明白他为什么需要一把斧子，”只有八岁的芬继续说。

@@ -4,4 +4,13 @@
   </NuxtLayout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { useDarkMode } from "~/composables/darkMode";
+
+const { initDarkMode } = useDarkMode();
+
+onMounted(() => {
+  initDarkMode();
+});
+</script>
