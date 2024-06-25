@@ -11,6 +11,16 @@ interface Article {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const inputPath = path.resolve(__dirname, "../public/CharlotteWeb/Chapter1.md");
 
+const sentenceMap = new Map();
+let lastLine = "";
+function parse(line: string) {
+  if (isChinese(line)) {
+    sentenceMap.set(line, lastLine);
+  } else {
+    lastLine = line;
+  }
+}
+
 (async function () {
   const r = createInterface({
     input: createReadStream(inputPath),
@@ -18,11 +28,18 @@ const inputPath = path.resolve(__dirname, "../public/CharlotteWeb/Chapter1.md");
   });
 
   r.on("line", (line) => {
-    const data = parse(line);
-    overwriteContent(JSON.stringify(data));
+    parse(line);
   });
 
-  await once(r, "close");
+  r.on("close", () => {
+    const list = Array.from(sentenceMap.entries()).map((item) => {
+      return {
+        chinese: item[0],
+        english: item[1],
+      };
+    });
+    overwriteContent(JSON.stringify(list));
+  });
 })();
 
 function generateOutPath() {
@@ -33,7 +50,6 @@ function generateOutPath() {
 
 function overwriteContent(content: string) {
   const path = generateOutPath();
-  console.log(111, path);
 
   fs.writeFile(path, content, (err: any) => {
     if (err) {
@@ -41,32 +57,6 @@ function overwriteContent(content: string) {
     } else {
       // console.log("Content written successfully.");
     }
-  });
-}
-
-const zhMap = new Map();
-
-const article_arr: any = [];
-const zhArr: any = [];
-
-function parse(lineData: string) {
-  if (isChinese(lineData)) {
-    zhArr.push(lineData);
-  } else {
-    article_arr.push(lineData);
-  }
-
-  zhArr.forEach((item: string, index: number) => {
-    zhMap.set(index, item);
-  });
-
-  console.log(111, zhMap);
-  console.log(222, article_arr);
-  return article_arr.map((item: any, index: number) => {
-    return {
-      english: item,
-      chinese: zhMap.get(index),
-    };
   });
 }
 
