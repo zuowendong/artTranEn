@@ -55,17 +55,19 @@
         ref="menuRef"
       >
         <ul class="text-base pt-4 md:flex md:justify-between md:pt-2">
-          <li v-for="(optItem, optIndex) in HEADER_OPTIONS" :key="optIndex">
-            <span
-              class="md:p-4 py-2 pl-3 hover:text-[#ff9900] flex items-center cursor-pointer"
-              @click="optItem.eventName"
-            >
-              <span class="h-6 w-6" :class="optItem.icon"></span>
-              <span class="text-sm font-medium pl-3">
-                {{ optItem.name }}
+          <template v-for="optItem in HEADER_OPTIONS" :key="optItem.id">
+            <li v-if="isAuthChapter(optItem.auth)">
+              <span
+                class="md:p-4 py-2 pl-3 hover:text-[#ff9900] flex items-center cursor-pointer"
+                @click="optItem.eventName"
+              >
+                <span class="h-6 w-6" :class="optItem.icon"></span>
+                <span class="text-sm font-medium pl-3">
+                  {{ optItem.name }}
+                </span>
               </span>
-            </span>
-          </li>
+            </li>
+          </template>
         </ul>
       </div>
     </nav>
@@ -74,6 +76,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 import { navigateTo } from "#app";
 import { Theme, useDarkMode } from "~/composables/darkMode";
 import { useFictionsStore } from "~/store/fictions";
@@ -84,6 +87,7 @@ const { darkMode, toggleDarkMode } = useDarkMode();
 const fictionsStore = useFictionsStore();
 const { handlePlayAll } = useSound();
 const { toggleLanguage } = useLanguage();
+const route = useRoute();
 
 const menuRef = ref();
 
@@ -96,29 +100,47 @@ const isDarkMode = computed(() => darkMode.value === Theme.DARK);
 const HEADER_OPTIONS = computed(() => {
   return [
     {
+      id: 1,
       name: "中/英",
       icon: "i-ph-book-open-text-duotone",
       eventName: toggleLanguage,
+      auth: ["article"],
     },
     {
+      id: 2,
       name: "朗诵全文",
       icon: "i-ph-speaker-simple-high",
       eventName: () => {
-        const _list = fictionsStore.currentArticle?.article || [];
+        const _list = fictionsStore.currentArticle?.data || [];
         const list = _list.map((s) => s.english);
         handlePlayAll(list);
       },
+      auth: ["article"],
     },
     {
+      id: 3,
       name: "亮/暗",
       icon: isDarkMode.value ? "i-ph-moon" : "i-ph-sun",
       eventName: toggleDarkMode,
+      auth: ["chapter", "article"],
     },
     {
+      id: 4,
       name: "返回",
       icon: "i-ph-sign-out",
-      eventName: () => navigateTo(`/`),
+      eventName: () => {
+        navigateTo(`/`);
+      },
+      auth: ["chapter", "article"],
     },
   ];
 });
+
+function isAuthChapter(authList: string[]) {
+  if (route.fullPath.includes("fiction-pack")) {
+    return authList.includes("chapter");
+  } else {
+    return authList.includes("article");
+  }
+}
 </script>

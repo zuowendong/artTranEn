@@ -1,10 +1,17 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import CharlotteWeb from "~/public/CharlotteWeb/Chapter1.json";
-interface Article {
+import { fictionsArticles } from "../assets/js/mock-fictions";
+
+interface Chapter {
   english: string;
   chinese: string;
   showChinese?: boolean;
+}
+
+interface Article {
+  id: number;
+  name: string;
+  data: Chapter[];
 }
 
 export interface FictionArticle {
@@ -13,58 +20,37 @@ export interface FictionArticle {
   key: string;
   enTitle?: string;
   desc: string;
-  article: Article[];
+  articles: Article[];
 }
 
 export const useFictionsStore = defineStore("fictions", () => {
-  const fictionArticles = ref<FictionArticle[]>([
-    {
-      id: 1,
-      title: "夏洛的网",
-      key: "CharlotteWeb",
-      enTitle: "Charlotte's Web",
-      desc: "",
-      article: CharlotteWeb,
-    },
-    { id: 2, title: "小王子", key: "TheLittlePrince", desc: "", article: [] },
-    {
-      id: 3,
-      title: "月亮与六便士",
-      key: "MoonAndSixpence",
-      desc: "",
-      article: [],
-    },
-    {
-      id: 4,
-      title: "老人与海",
-      key: "TheOldManAndTheSea",
-      desc: "",
-      article: [],
-    },
-    {
-      id: 5,
-      title: "自定义",
-      key: "",
-      desc: "自定义操作，支持复制，解析文章，语音播放，自动翻译",
-      article: [],
-    },
-  ]);
+  const fictionArticles = ref<FictionArticle[]>(fictionsArticles);
 
-  const currentArticle = ref<FictionArticle | null>(null);
+  const currentFiction = ref<FictionArticle | null>(null);
+  const currentArticle = ref<Article | null>(null);
 
-  async function setCurrentArticle(id: number) {
+  function getCurrentFiction(fictionId: number) {
     const targetIndex = fictionArticles.value.findIndex(
-      (article) => article.id === id
+      (fiction) => fiction.id === fictionId
     );
+    currentFiction.value = fictionArticles.value[targetIndex];
+  }
 
-    currentArticle.value =
-      targetIndex !== -1 ? fictionArticles.value[targetIndex] : null;
-    console.log(111111, currentArticle.value);
+  function getCurrentArticle(articleId: number) {
+    if (!currentFiction.value) return;
+
+    const articles = currentFiction.value.articles;
+    const targetIndex = articles.findIndex(
+      (article) => article.id === articleId
+    );
+    currentArticle.value = articles[targetIndex];
   }
 
   return {
     fictionArticles,
+    currentFiction,
+    getCurrentFiction,
     currentArticle,
-    setCurrentArticle,
+    getCurrentArticle,
   };
 });
