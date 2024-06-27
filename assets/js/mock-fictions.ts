@@ -11,12 +11,12 @@ export const fictionsArticles = [
     articles: [
       {
         id: 1,
-        name: "Chapter1",
+        name: "Chapter 1 Before Breakfast",
         data: Chapter1,
       },
       {
         id: 2,
-        name: "Chapter2",
+        name: "Chapter 2 Wilbur",
         data: Chapter2,
       },
     ],
