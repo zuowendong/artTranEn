@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "build:fiction": "tsx ./scripts/fiction.ts"
+    "build:fiction": "tsx ./scripts/fiction.ts",
+    "build:pdf": "pnpm -F @arttranen/fictions pdf:parse"
   },
   "dependencies": {
     "axios": "^1.7.2",

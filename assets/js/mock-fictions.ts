@@ -1,6 +1,4 @@
-import Chapter1 from "~/public/CharlotteWeb/Chapter1.json";
-import Chapter2 from "~/public/CharlotteWeb/Chapter2.json";
-import Chapter3 from "~/public/CharlotteWeb/Chapter3.json";
+import Chapter1 from "~/packages/CharlotteWeb/data/json/CHAPTER 1 Before Breakfast.json";
 
 export const fictionsArticles = [
   {
@@ -14,16 +12,6 @@ export const fictionsArticles = [
         id: 1,
         name: "Chapter 1 Before Breakfast",
         data: Chapter1,
-      },
-      {
-        id: 2,
-        name: "Chapter 2 Wilbur",
-        data: Chapter2,
-      },
-      {
-        id: 3,
-        name: "Chapter 3 Escape",
-        data: Chapter3,
       },
     ],
   },
