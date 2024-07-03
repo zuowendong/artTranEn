@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full pt-8 grid grid-cols-1 md:grid-cols-4 gap-x-5 gap-y-7">
+  <div class="w-full pt-8 grid grid-cols-1 md:grid-cols-4 gap-x-5 gap-y-10">
     <div
-      v-for="(article, index) in fictionList?.articles"
-      :key="index"
+      v-for="article in fictionList?.articles"
+      :key="article.id"
       class="card glass w-full shadow-md"
     >
       <div class="card-body">

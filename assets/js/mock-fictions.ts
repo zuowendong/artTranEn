@@ -1,4 +1,4 @@
-import Chapter1 from "~/packages/CharlotteWeb/data/json/CHAPTER 1 Before Breakfast.json";
+import CharlotteWeb from "./mock-fictions.json";
 
 export const fictionsArticles = [
   {
@@ -7,13 +7,7 @@ export const fictionsArticles = [
     key: "CharlotteWeb",
     enTitle: "Charlotte's Web",
     desc: "",
-    articles: [
-      {
-        id: 1,
-        name: "Chapter 1 Before Breakfast",
-        data: Chapter1,
-      },
-    ],
+    articles: CharlotteWeb,
   },
   {
     id: 2,

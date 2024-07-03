@@ -29,12 +29,10 @@ const fictions = fs.readdirSync(path.resolve(__dirname, "../data/json"));
     })
   );
 
-  console.log(fictionList);
-
   const articleList: any = [];
 
   await Promise.all(
-    fictionList.map((fiction, index) => {
+    fictionList.map((fiction) => {
       const { fileName, fictionName } = fiction;
 
       const jsonText = fs.readFileSync(
@@ -43,11 +41,24 @@ const fictions = fs.readdirSync(path.resolve(__dirname, "../data/json"));
       );
 
       articleList.push({
-        id: index + 1,
+        id: extractNumbers(fictionName),
         name: fictionName,
         data: JSON.parse(jsonText),
       });
     })
+  );
+
+  const articlePath = path.resolve(
+    __dirname,
+    "../../../assets/js/mock-fictions.json"
+  );
+  fs.writeFileSync(
+    articlePath,
+    JSON.stringify(
+      articleList.sort((a: any, b: any) => {
+        return a.id - b.id;
+      })
+    )
   );
 })();
 
@@ -55,4 +66,14 @@ function save(content: string, fileName: string) {
   const filePath = path.resolve(outputPath, `${fileName}.json`);
   fs.writeFileSync(filePath, content);
   console.log(`${fileName}.json 写入成功`);
+}
+
+function extractNumbers(str: string) {
+  let numbers = "";
+  for (let i = 0; i < str.length; i++) {
+    if (!isNaN(parseInt(str[i]))) {
+      numbers += str[i];
+    }
+  }
+  return Number(numbers);
 }
