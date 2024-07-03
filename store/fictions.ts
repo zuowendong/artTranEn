@@ -3,15 +3,16 @@ import { ref } from "vue";
 import { fictionsArticles } from "../assets/js/mock-fictions";
 
 interface Chapter {
-  english: string;
-  chinese: string;
-  showChinese?: boolean;
+  title: string;
+  title_en: string;
+  data_en: { english: string }[];
+  data_zh: { chinese: string }[];
 }
 
 interface Article {
   id: number;
   name: string;
-  data: Chapter[];
+  data: Chapter;
 }
 
 export interface FictionArticle {

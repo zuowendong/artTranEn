@@ -26,11 +26,13 @@ import { ref, computed, onMounted } from "vue";
 import { navigateTo } from "#app";
 import { useFictionsStore } from "~/store/fictions";
 import { useRoute } from "vue-router";
+import { useLanguage } from "~/composables/language";
 
 const fictionsStore = useFictionsStore();
 const route = useRoute();
 const fictionPackId = route.params.id;
 const { fictionList, handleRead } = useFiction();
+const { resetEnglish } = useLanguage();
 
 function useFiction() {
   const fictionList = computed(() => fictionsStore.currentFiction);
@@ -39,6 +41,7 @@ function useFiction() {
   });
 
   function handleRead(chapterId: number) {
+    resetEnglish();
     navigateTo(`/fiction/${fictionPackId}/${chapterId}`);
   }
 

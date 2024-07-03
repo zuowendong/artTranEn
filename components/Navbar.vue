@@ -1,5 +1,7 @@
 <template>
-  <header class="w-full">
+  <header
+    class="w-full transition-all duration-300 ease-linear sticky top-0 z-10 glass bg-gradient-to-r from-transparent via-white/10 to-transparent shadow-md"
+  >
     <nav
       class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 text-lg"
     >
@@ -34,6 +36,14 @@
         </div>
       </NuxtLink>
 
+      <div
+        class="md:hidden md:p-4 py-2 pl-3 hover:text-[#ff9900] flex items-center cursor-pointer"
+        @click="toggleLanguage"
+      >
+        <span class="h-6 w-6 i-ph-book-open-text-duotone"></span>
+        <span class="text-sm font-medium pl-3"> 中/英 </span>
+      </div>
+
       <svg
         xmlns="<http://www.w3.org/2000/svg>"
         id="menu-button"
@@ -57,7 +67,7 @@
         <ul class="text-base pt-4 md:flex md:justify-between md:pt-2">
           <template v-for="optItem in HEADER_OPTIONS" :key="optItem.id">
             <li v-if="isAuthChapter(optItem.auth)">
-              <span
+              <div
                 class="md:p-4 py-2 pl-3 hover:text-[#ff9900] flex items-center cursor-pointer"
                 @click="optItem.eventName"
               >
@@ -65,7 +75,7 @@
                 <span class="text-sm font-medium pl-3">
                   {{ optItem.name }}
                 </span>
-              </span>
+              </div>
             </li>
           </template>
         </ul>
@@ -111,7 +121,7 @@ const HEADER_OPTIONS = computed(() => {
       name: "朗诵全文",
       icon: "i-ph-speaker-simple-high",
       eventName: () => {
-        const _list = fictionsStore.currentArticle?.data || [];
+        const _list = fictionsStore.currentArticle?.data.data_en || [];
         const list = _list.map((s) => s.english);
         handlePlayAll(list);
       },

@@ -1,6 +1,3 @@
-// const START_SIGN = "CHAPTER 2";
-// const END_SIGN = "CHAPTER 3";
-
 export function parse(text: string, chapterNum: number) {
   const START_SIGN = `CHAPTER ${chapterNum}`;
   const END_SIGN = `CHAPTER ${chapterNum + 1}`;
@@ -33,7 +30,6 @@ export function parse(text: string, chapterNum: number) {
   const result = [];
   for (let i = 0; i < textList.length; i++) {
     let data = {
-      chinese: "",
       english: "",
     };
     // console.log("初始==>", textList[i]);

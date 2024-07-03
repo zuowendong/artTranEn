@@ -29,6 +29,10 @@ function englishLanguage(): boolean {
   return isEnglish.value;
 }
 
+function resetEnglish() {
+  update(true);
+}
+
 export function useLanguage() {
   loadCache();
 
@@ -37,5 +41,6 @@ export function useLanguage() {
     remove,
     toggleLanguage,
     englishLanguage,
+    resetEnglish,
   };
 }

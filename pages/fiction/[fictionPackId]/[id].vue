@@ -1,35 +1,36 @@
 <template>
   <h1 class="text-2xl font-medium py-5">
-    {{ articleData?.name }}
+    {{
+      englishLanguage() ? articleData?.data.title_en : articleData?.data.title
+    }}
   </h1>
 
-  <div
-    v-for="(sentence, index) in articleData?.data"
-    :key="index"
-    class="text-left pb-10 relative w-full"
-  >
-    <n-tooltip placement="bottom-start" trigger="click">
-      <template #trigger>
-        <div class="leading-7 cursor-pointer">
-          <span
-            class="i-ph-speaker-simple-high"
-            @click="handleSound(sentence.english)"
-          ></span>
-          <span class="hover:text-[#ff9900] pl-1">
-            {{ englishLanguage() ? sentence.english : sentence.chinese }}
-          </span>
-        </div>
-      </template>
-      <span>
-        {{ englishLanguage() ? sentence.chinese : sentence.english }}
-      </span>
-    </n-tooltip>
-  </div>
+  <template v-if="englishLanguage()">
+    <div
+      v-for="(sentence, index) in articleData?.data.data_en"
+      :key="index"
+      class="text-left pb-10 relative w-full flex items-start"
+    >
+      <span
+        class="i-ph-speaker-simple-high cursor-pointer shrink-0 pt-7"
+        @click="handleSound(sentence.english)"
+      ></span>
+      <span class="pl-2"> {{ sentence.english }}</span>
+    </div>
+  </template>
+  <template v-else>
+    <div
+      v-for="(sentence, index) in articleData?.data.data_zh"
+      :key="index"
+      class="text-left pb-10 relative w-full"
+    >
+      <span> {{ sentence.chinese }}</span>
+    </div>
+  </template>
 </template>
 
 <script setup lang="ts">
 import { onMounted, computed } from "vue";
-import { NTooltip } from "naive-ui";
 import { useSound } from "~/composables/sound";
 import { useLanguage } from "~/composables/language";
 import { useFictionsStore } from "~/store/fictions";

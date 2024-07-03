@@ -1,26 +1,40 @@
 import fs from "fs";
 import path from "path";
 import pdf from "pdf-parse";
-import { parse } from "./parser";
+import { parse as parseEnglish } from "./parser-english";
+import { parse as parseChinese } from "./parse-chinese";
 
 const targetPath = path.resolve(__dirname, "../data/CharlotteWeb-en.pdf");
+const targetPath_zh = path.resolve(__dirname, "../data/CharlotteWeb-zh.pdf");
 const outputPath = path.resolve(__dirname, "../data/json");
 const fictions = fs.readdirSync(path.resolve(__dirname, "../data/json"));
 
 (async function () {
-  let dataBuffer = fs.readFileSync(targetPath);
-  const rawPDFData = await pdf(dataBuffer);
+  let dataBuffer_en = fs.readFileSync(targetPath);
+  const rawPDFData_en = await pdf(dataBuffer_en);
 
-  // for (let i = 1; i <= 22; i++) {
-  //   const result = parse(rawPDFData.text, i);
-  //   save(JSON.stringify(result.content), result.title);
-  // }
+  let dataBuffer_zh = fs.readFileSync(targetPath_zh);
+  const rawPDFData_zh = await pdf(dataBuffer_zh);
 
-  const result = parse(rawPDFData.text, 22);
-  save(JSON.stringify(result.content), result.title);
+  for (let i = 1; i <= 22; i++) {
+    const { content, title } = parseChinese(rawPDFData_zh.text, i);
+    const { content: contentEn, title: titleEn } = parseEnglish(
+      rawPDFData_en.text,
+      i
+    );
+
+    const contentData = {
+      title: title === ".夏日" ? "6.夏日" : title,
+      title_en: titleEn,
+      data_en: contentEn,
+      data_zh: content,
+    };
+
+    save(JSON.stringify(contentData), titleEn);
+  }
 
   const fictionList = await Promise.all(
-    fictions.map((fileName, index) => {
+    fictions.map((fileName) => {
       const fictionName = path.parse(fileName).name;
       return {
         fileName,
