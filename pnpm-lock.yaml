@@ -52,7 +52,17 @@ importers:
         specifier: ^4.15.6
         version: 4.15.6
 
-  packages/fictions:
+  packages/CharlotteWeb:
+    dependencies:
+      pdf-parse:
+        specifier: ^1.1.1
+        version: 1.1.1
+    devDependencies:
+      '@types/pdf-parse':
+        specifier: ^1.1.4
+        version: 1.1.4
+
+  packages/TheLittlePrince:
     dependencies:
       pdf-parse:
         specifier: ^1.1.1

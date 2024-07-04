@@ -1,4 +1,5 @@
 import CharlotteWeb from "./mock-fictions.json";
+import TheLittlePrince from "./TheLittlePrince.json";
 
 export const fictionsArticles = [
   {
@@ -14,7 +15,7 @@ export const fictionsArticles = [
     title: "小王子",
     key: "TheLittlePrince",
     desc: "",
-    articles: [],
+    articles: TheLittlePrince,
   },
   {
     id: 3,

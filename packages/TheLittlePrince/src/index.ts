@@ -4,8 +4,8 @@ import pdf from "pdf-parse";
 import { parse as parseEnglish } from "./parser-english";
 import { parse as parseChinese } from "./parse-chinese";
 
-const targetPath = path.resolve(__dirname, "../data/CharlotteWeb-en.pdf");
-const targetPath_zh = path.resolve(__dirname, "../data/CharlotteWeb-zh.pdf");
+const targetPath = path.resolve(__dirname, "../data/TheLittlePrince-en.pdf");
+const targetPath_zh = path.resolve(__dirname, "../data/TheLittlePrince-zh.pdf");
 const outputPath = path.resolve(__dirname, "../data/json");
 const fictions = fs.readdirSync(outputPath);
 
@@ -16,7 +16,7 @@ const fictions = fs.readdirSync(outputPath);
   let dataBuffer_zh = fs.readFileSync(targetPath_zh);
   const rawPDFData_zh = await pdf(dataBuffer_zh);
 
-  for (let i = 1; i <= 22; i++) {
+  for (let i = 1; i <= 27; i++) {
     const { content, title } = parseChinese(rawPDFData_zh.text, i);
     const { content: contentEn, title: titleEn } = parseEnglish(
       rawPDFData_en.text,
@@ -24,7 +24,7 @@ const fictions = fs.readdirSync(outputPath);
     );
 
     const contentData = {
-      title: title === ".夏日" ? "6.夏日" : title,
+      title,
       title_en: titleEn,
       data_en: contentEn,
       data_zh: content,
@@ -64,7 +64,7 @@ const fictions = fs.readdirSync(outputPath);
 
   const articlePath = path.resolve(
     __dirname,
-    "../../../assets/js/mock-fictions.json"
+    "../../../assets/js/TheLittlePrince.json"
   );
   fs.writeFileSync(
     articlePath,
